@@ -17,6 +17,12 @@ done
 
 echo "Kafka Connect is ready!"
 
+# Pre-create Kafka topics so consumers discover them immediately
+echo "Ensuring Kafka CDC topics exist..."
+docker exec kafka /kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --if-not-exists --topic cdc.inventory.customers --partitions 1 --replication-factor 1 2>/dev/null || true
+docker exec kafka /kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --if-not-exists --topic cdc.inventory.orders --partitions 1 --replication-factor 1 2>/dev/null || true
+
+
 # Check if connector is already registered
 CONNECTOR_NAME=$(grep -o '"name": *"[^"]*"' "$CONFIG_FILE" | head -1 | cut -d'"' -f4)
 

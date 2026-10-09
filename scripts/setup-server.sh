@@ -68,6 +68,13 @@ chmod +x ./scripts/register-connectors.sh
 chmod +x ./scripts/test-cdc.sh
 ./scripts/register-connectors.sh
 
+echo -e "\n${YELLOW}>>> Waiting 8 seconds for Debezium to initialize change stream cursors...${NC}"
+sleep 8
+
+# Restart cdc-consumer so it immediately attaches to the established topic
+docker compose restart cdc-consumer
+sleep 3
+
 # 5. Run Verification Test
 echo -e "\n${YELLOW}>>> [5/5] Running End-to-End Replication Test...${NC}"
 ./scripts/test-cdc.sh

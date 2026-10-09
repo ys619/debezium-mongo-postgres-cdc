@@ -71,7 +71,8 @@ def create_kafka_consumer(max_retries=30, delay=3):
                 enable_auto_commit=True,
                 value_deserializer=lambda v: json.loads(v.decode("utf-8")) if v else None,
                 key_deserializer=lambda k: json.loads(k.decode("utf-8")) if k else None,
-                consumer_timeout_ms=1000
+                consumer_timeout_ms=1000,
+                metadata_max_age_ms=2000
             )
             # Subscribe to pattern
             consumer.subscribe(pattern=TOPIC_PATTERN)
