@@ -1,0 +1,25 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+venv/
+.venv/
+ENV/
+
+# Docker volumes / persistence
+mongo_data/
+postgres_data/
+
+# Environment files
+.env
+
+# Logs & temp
+*.log
+.system_generated/
